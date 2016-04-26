@@ -117,6 +117,25 @@ public class SisBulaMemoryTest {
 		
 	}
 	
+	@Test
+	public void testaCadastroDoenca(){
+		sis.cadastraDoenca("Alzheimer");
+		sis.cadastraSintomaDeDoenca("Alzheimer","perda da memória");
+		sis.cadastraSintomaDeDoenca("Alzheimer","distúrbios de comportamento");
+		sis.cadastraPossivelCausaDeDoenca("Alzheimer","Sedentarismo");
+		sis.cadastraPossivelCausaDeDoenca("Alzheimer","Falta de exercícios mentais");
+		List <Doenca> doencas = sis.pesquisaDoencasCausadasPor("Sedentarismo");
+		assertTrue(doencas.size()==1);
+		assertEquals("Alzheimer", doencas.get(0).getNome());
+		List<CausaDeDoenca> possiveisCausas = sis.pesquisaPossiveisCausasDe("Alzheimer");
+		assertEquals(2, possiveisCausas.size());
+		assertTrue(!possiveisCausas.get(0).equals(possiveisCausas.get(1)));
+		assertTrue(possiveisCausas.get(0).toString().equals("Sedentarismo")||possiveisCausas.get(0).toString().equals("Falta de exercícios mentais"));
+		assertTrue(possiveisCausas.get(1).toString().equals("Sedentarismo")||possiveisCausas.get(1).toString().equals("Falta de exercícios mentais"));
+				
+		
+	}
+	
 	
 	
 
